@@ -46,7 +46,7 @@ function testValidateInitialAmount($initialAmount)
     }
 }
 
-function testValidatePortionSize($testKeyValuePairs, $intialSize) {
+function testValidatePortionSize($testKeyValuePairs, $initialSize) {
     foreach ($testKeyValuePairs as $key => $value) {
         $result = validatePortionSize($key, $initialSize);
         //echo "$key : $value : $intialSize : $result";
@@ -70,13 +70,25 @@ $keyValuePairs =  array(
     20 => true
 );
 
+$keyValuePairsForPortionSize =  array(
+    $a => false,
+    "foo" => false, 
+    0 => false, 
+    -1 => false,
+    20 => false,
+    1 => true,
+    2 => true,
+    3 => true
+);
+
 $keyValuePairs2 =  array(
     100 => false
 );
 
 testValidateInitialAmount($keyValuePairs);
 
-testValidatePortionSize($keyValuePairs, 250);
+testValidatePortionSize($keyValuePairsForPortionSize, 250);
+
 testValidatePortionSize($keyValuePairs2, 50);
 
 ?>
