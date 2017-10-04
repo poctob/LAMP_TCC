@@ -1,56 +1,71 @@
 <?php
 require_once "catFeederValidator.php";
 
-function handleRemainder($remainder)
+class CatFeeder
 {
+    private $initialAmount;
+    private $catFeederValidator;
 
-}
+    public function __construct($initialAmount)
+    {
+        $this->initialAmount = $initialAmount;
+        $this->catFeederValidator = new CatFeederValidator();
+    } //constructor end
 
-function dispenceFood($initialAmount, $portionSize)
-{
-
-    $is_valid = validateInitialAmount($initialAmount) &&
-    validatePortionSize($portionSize, $initialAmount);
-
-    if (!$is_valid) {
-        echo "Validation failed!";
-        return;
+    public function initialAmount()
+    {
+        return $this->initialAmount;
     }
 
-    $portion = 0;
-    $remainder = 0;
+    private function handleRemainder()
+    {
 
-    $portion = $portionSize;
-    $remainder = $initialAmount - $portion;
+    } //handleRemainder end
 
-    handleRemainder($remainder);
+    public function dispenceFood($portionSize)
+    {
+        $is_valid =
+        $this->catFeederValidator->validateInitialAmount($this->initialAmount) &&
+        $this->catFeederValidator->validatePortionSize($portionSize, $this->initialAmount);
 
-    return $portion;
-}
-
-function addFood($initialAmount, $amountToAdd)
-{
-    return $initialAmount + $amountToAdd;
-}
-
-function emptyFeeder($initialAmount, $portionSize)
-{
-    echo "Received $initialAmount oz of food <br />";
-    echo "Need to empty it using $portionSize oz Portion Size.<br />";
-
-    while ($initialAmount > 0) {
-
-        if ($initialAmount >= $portionSize) {
-            dispenceFood($initialAmount, $portionSize);
-            $initialAmount -= $portionSize;
-        } elseif ($initialAmount > 0) {
-            dispenceFood($initialAmount, $initialAmount);
-            $initialAmount = 0;
+        if (!$is_valid) {
+            echo "Validation failed!";
+            return;
         }
 
-        echo "Dispenced $portionSize oz,
-        have $initialAmount oz remaining. <br />";
-    }
+        $this->initialAmount -= $portionSize;
 
-    echo "All Done!";
-}
+        $this->handleRemainder();
+    } //dispenceFood end
+
+    public function addFood($amountToAdd)
+    {
+        $this->initialAmount += $amountToAdd;
+    } //addFood end
+
+    public function emptyFeeder($portionSize)
+    {
+        echo "Starting with $this->initialAmount oz of food <br />";
+        echo "Need to empty it using $portionSize oz Portion Size.<br />";
+
+        while ($this->initialAmount > 0) {
+
+            if ($this->initialAmount >= $portionSize) {
+                $this->dispenceFood($portionSize);
+
+            } elseif ($this->initialAmount > 0) {
+                $this->dispenceFood($initialAmount);
+                $this->initialAmount = 0;
+            }
+
+            echo "Dispenced $portionSize oz,
+            have $this->initialAmount oz remaining. <br />";
+        }
+
+        echo "All Done!";
+    } //emptyFeeder end
+
+} //class end
+
+//$feeder = new CatFeeder(600);
+//$feeder->emptyFeeder(3);
