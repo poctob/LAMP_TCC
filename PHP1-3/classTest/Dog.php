@@ -74,6 +74,20 @@ class YellowLab extends Dog
     }
 }
 
+class Blacklab extends Dog
+{
+    public function __construct($name)
+    {
+        parent::__construct($name, "black");
+    }
+}
+
 $fido = new YellowLab("Fido");
 $fido->bark();
 $fido->whatColor();
+
+echo "<br />";
+
+$rover = new Blacklab("Rover");
+$rover->bark();
+$rover->whatColor();
