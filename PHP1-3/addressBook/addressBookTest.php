@@ -22,33 +22,41 @@ $contact->setEmail("john@doe.com");
 $contact->setNote("Hello world!");
 
 $addressBook = new AddressBook();
-$addressBook->addContact($contact);
 
+// $addressBook->addContact($contact);
+
+// $all_contacts = $addressBook->getAllContacts();
+// print_r($all_contacts);
+
+// echo "<br /><br />";
+
+// $john = $addressBook->getContact("John");
+// print_r($john);
+
+// $bob = clone $contact;
+// $addressBook->addContact($bob);
+
+// echo "<br /><br />";
+//$addressBook->deleteContact($contact);
 $all_contacts = $addressBook->getAllContacts();
 print_r($all_contacts);
 
-echo "<br /><br />";
+// $bob->getPerson()->setFirstName("Bob");
 
-$john = $addressBook->getContact("John");
-print_r($john);
+// echo "<br /><br />";
+// $all_contacts = $addressBook->getAllContacts();
+// print_r($all_contacts);
 
-$bob = clone $john;
-$addressBook->addContact($bob);
+// $bob2 = clone $bob;
+// $bob2->getPerson()->setFirstName("Bob2");
+// $addressBook->updateContact($bob, $bob2);
 
-echo "<br /><br />";
-$all_contacts = $addressBook->getAllContacts();
-print_r($all_contacts);
+// echo "<br /><br />";
+// $all_contacts = $addressBook->getAllContacts();
+// print_r($all_contacts);
 
-$bob->getPerson()->setFirstName("Bob");
+// $addressBook->deleteContact($bob2);
 
-echo "<br /><br />";
-$all_contacts = $addressBook->getAllContacts();
-print_r($all_contacts);
-
-$bob2 = clone $bob;
-$bob2->getPerson()->setFirstName("Bob2");
-$addressBook->updateContact($bob, $bob2);
-
-echo "<br /><br />";
-$all_contacts = $addressBook->getAllContacts();
-print_r($all_contacts);
+// echo "<br /><br />";
+// $all_contacts = $addressBook->getAllContacts();
+// print_r($all_contacts);
