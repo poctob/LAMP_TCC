@@ -6,6 +6,8 @@ require_once "person.php";
 class Contact
 {
 
+    private $id;
+
     private $person;
     private $phone_number;
     private $email;
@@ -18,6 +20,16 @@ class Contact
     {
         $this->person = new Person();
         $this->address = new Address();
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getPerson()
