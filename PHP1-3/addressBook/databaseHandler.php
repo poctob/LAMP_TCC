@@ -39,6 +39,8 @@ class DatabaseHandler
         zip = '%s',
         type = '%s' WHERE id = '%s'";
 
+    const DELETE_QUERY = "DELETE FROM contact WHERE id = '%s'";
+
     private $connection;
 
     public function connectToDatabase()
@@ -156,7 +158,21 @@ class DatabaseHandler
             $id
         );
 
-        echo "<br />$query<br />";
+        // echo "<br />$query<br />";
+
+        $result = $this->connection->query($query);
+
+        if (!$result) {
+            die($this->connection->error);
+        }
+
+        $this->disconnectFromDatabase();
+    }
+
+    public function deleteItem($id)
+    {
+        $this->connectToDatabase();
+        $query = sprintf(self::DELETE_QUERY, $id);
 
         $result = $this->connection->query($query);
 

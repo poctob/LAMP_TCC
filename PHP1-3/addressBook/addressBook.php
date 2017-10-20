@@ -43,15 +43,9 @@ class AddressBook
         }
     }
 
-    public function deleteContact($contact)
+    public function deleteContact($id)
     {
-        $index = array_search($contact, $this->contacts);
-
-        if ($index >= 0) {
-            unset($this->contacts[$index]);
-            // $this->fileHandler->writeFile($this->contacts);
-            $this->databaseHandler->writeDatabase($this->contacts);
-        }
+        $this->databaseHandler->deleteItem($id);
     }
 
     public function getContact($first_name)
@@ -61,5 +55,17 @@ class AddressBook
                 return $contact;
             }
         }
+    }
+
+    public function prettyPrint()
+    {
+        $result = "";
+        foreach ($this->contacts as $contact) {
+            $result .= "<hr />";
+            $result .= $contact->prettyPrint();
+            $result .= "<hr />";
+        }
+
+        return $result;
     }
 }

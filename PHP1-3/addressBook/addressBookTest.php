@@ -23,9 +23,11 @@ $contact->setNote("Hello world!");
 
 $addressBook = new AddressBook();
 
-//$addressBook->addContact($contact);
+// $addressBook->addContact($contact);
 
-// $all_contacts = $addressBook->getAllContacts();
+$all_contacts = $addressBook->getAllContacts();
+echo $addressBook->prettyPrint();
+
 // print_r($all_contacts);
 
 // echo "<br /><br />";
@@ -38,13 +40,13 @@ $addressBook = new AddressBook();
 
 // echo "<br /><br />";
 //$addressBook->deleteContact($contact);
-$all_contacts = $addressBook->getAllContacts();
-$john = $all_contacts[0];
-$bob = clone $john;
-$bob->getPerson()->setFirstName('Bob');
-$addressBook->updateContact($john, $bob);
+// $all_contacts = $addressBook->getAllContacts();
+// $john = $all_contacts[0];
+// $bob = clone $john;
+// $bob->getPerson()->setFirstName('Bob');
+// $addressBook->updateContact($john, $bob);
 
-print_r($all_contacts);
+// print_r($all_contacts);
 
 // $bob->getPerson()->setFirstName("Bob");
 

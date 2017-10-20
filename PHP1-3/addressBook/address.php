@@ -47,4 +47,10 @@ class Address
     {
         $this->zip = $zip;
     }
+
+    public function prettyPrint()
+    {
+        return "$this->street <br />
+                 $this->city $this->state $this->zip";
+    }
 }

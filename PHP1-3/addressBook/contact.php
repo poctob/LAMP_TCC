@@ -102,4 +102,18 @@ class Contact
         $this->note = $note;
     }
 
+    public function prettyPrint()
+    {
+        return
+        $this->person->prettyPrint() .
+        "<br />" .
+        $this->address->prettyPrint() .
+            "<br />" .
+            "$this->type <br />
+                 $this->phone_number <br />
+                 $this->email <br />
+                 $this->note <br />
+                 $this->comment";
+    }
+
 }
