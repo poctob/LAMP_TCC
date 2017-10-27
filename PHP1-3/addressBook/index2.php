@@ -23,7 +23,8 @@
     </div>
 
     <div class="card-body">
-    <table class="table table-striped table-dark">
+
+    <div id="accordion" role="tablist">
 
 <?php
 require_once "addressBook.php";
@@ -31,27 +32,46 @@ $addressBook = new AddressBook();
 $all_contacts = $addressBook->getAllContacts();
 
 foreach ($all_contacts as $contact) {
-    echo "<tr>";
-    echo "<td>";
+
+    echo '<div class="card">
+    <div class="card-header" role="tab" id="headingOne">
+      <h5 class="mb-0">
+        <a data-toggle="collapse" href="#collapse' . $contact->getId() . '"
+        aria-expanded="true" aria-controls="collapse' . $contact->getId() . '">
+         ' . $contact->getPerson()->prettyPrint() . '
+        </a>
+      </h5>
+    </div>';
+
+    echo '<div id="collapse' . $contact->getId() . '" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+    <div class="card-body">';
+
+    echo '<div class="container">
+            <div class="row">
+
+    <div class="col">';
     echo $contact->prettyPrint();
-    echo "</td>";
-    echo "<td>";
+    echo '</div>';
+
+    echo '<div class="col-2">';
     echo "<form method='post' action='update.php'>";
     echo "<input type='hidden' name='Id' value='" . $contact->getId() . "' />";
     echo "<input class='btn btn-warning' type='submit' value='Update' />";
     echo "</form>";
-    echo "</td>";
-    echo "<td>";
+    echo '</div>';
+
+    echo '<div class="col-2">';
     echo "<form method='post' action='delete.php'>";
     echo "<input type='hidden' name ='Id' value='" . $contact->getId() . "' />";
     echo "<input class='btn btn-danger' type='submit' value='Delete' />";
     echo "</form>";
-    echo "</td>";
-    echo "</tr>";
+    echo '</div></div></div>';
+
+    echo '</div></div></div>';
 }
 
 ?>
-    </table>
+    </div>
     </div>
     </div>
     </div>

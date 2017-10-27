@@ -31,16 +31,9 @@ class AddressBook
         $this->databaseHandler->insertItem($contact);
     }
 
-    public function updateContact($old_contact, $new_contact)
+    public function updateContact($contact, $id)
     {
-        $index = array_search($old_contact, $this->contacts);
-
-        if ($index >= 0) {
-            $this->contacts[$index] = $new_contact;
-            // $this->fileHandler->writeFile($this->contacts);
-            $this->databaseHandler->updateItem
-                ($new_contact, $old_contact->getId());
-        }
+        $this->databaseHandler->updateItem($contact, $id);
     }
 
     public function deleteContact($id)
