@@ -23,3 +23,13 @@ echo $pet->getName() . "<br />";
 $pet = new HoundDog();
 $pet->setName('Fido');
 echo $pet->getName() . "<br />";
+
+$pet->fetchDuck();
+
+echo "<br />";
+
+Dog::getType();
+
+echo "<br />";
+
+MammalType::getType();
