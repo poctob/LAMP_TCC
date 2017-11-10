@@ -2,7 +2,7 @@
 
 require_once "nameTag.php";
 
-class Pet
+abstract class Pet
 {
     private $name;
     private $nameTag;
