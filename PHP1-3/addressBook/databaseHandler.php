@@ -41,7 +41,26 @@ class DatabaseHandler
 
     const DELETE_QUERY = "DELETE FROM contact WHERE id = '%s'";
 
+    const CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS `contact` (
+        `id` int(11) NOT NULL,
+        `firstName` varchar(50) NOT NULL,
+        `lastName` varchar(50) NOT NULL,
+        `email` varchar(100) DEFAULT NULL,
+        `phone` varchar(45) NOT NULL,
+        `note` varchar(100) DEFAULT NULL,
+        `comment` varchar(100) DEFAULT NULL,
+        `street` varchar(75) DEFAULT NULL,
+        `city` varchar(45) DEFAULT NULL,
+        `state` varchar(45) DEFAULT NULL,
+        `zip` varchar(45) DEFAULT NULL,
+        `type` varchar(45) DEFAULT NULL
+      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+
     private $connection;
+
+    public function __construct() {
+        $this->createTable();
+    }
 
     public function connectToDatabase()
     {
@@ -175,6 +194,18 @@ class DatabaseHandler
         $query = sprintf(self::DELETE_QUERY, $id);
 
         $result = $this->connection->query($query);
+
+        if (!$result) {
+            die($this->connection->error);
+        }
+
+        $this->disconnectFromDatabase();
+    }
+
+    private function createTable()
+    {
+        $this->connectToDatabase();
+        $result = $this->connection->query(self::CREATE_TABLE_QUERY);
 
         if (!$result) {
             die($this->connection->error);
