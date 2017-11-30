@@ -22,25 +22,27 @@
         </form>
     </div>
 
-    <div class="card-body">
-
+<div class="card-body">
 
 <?php
 require_once "TaskController.php";
 $taskController = new TaskController();
 $all_tasks = $taskController->getAllTasks();
 
-echo '<table class="table table-striped">
-<thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Title</th>
-    <th scope="col">Date Created</th>
-    <th scope="col">Date Completed</th>
-    <th scope="col"></th>
-  </tr>
-</thead>
-<tbody>';
+echo '<ul class="list-group">
+
+<li class="list-group-item"> 
+<div class="row">
+
+<div class="col-sm">#</div>
+<div class="col-sm">Title</div>
+<div class="col-sm">Date Created</div>
+<div class="col-sm">Date Completed</div>
+<div class="col-sm"></div>
+
+</div>
+</li>';
+
 
 foreach ($all_tasks as $task) {
 
@@ -49,46 +51,27 @@ foreach ($all_tasks as $task) {
     '';
 
     $button = !$task->getIsComplete() ? 
-    '<button type="button" class="btn btn-primary" 
-        onClick=completeTask('. $task->getId() .')>Complete</button>' :
+    '<button type="submit" class="btn btn-primary">Complete</button>' :
     '';
 
     echo '   
-      <tr>
-        <th scope="row">' . $task->getId() . '</th>
-        <td ' . $class . '>' . $task->getTitle() . '</td>
-        <td>' . $task->getDateCreated() . '</td>
-        <td>' . $task->getDateCompleted() . '</td>
-        <td>' . $button . '</td>
-      </tr>';
+        <li class="list-group-item"> 
+        <form method = "post" action = "TaskController.php" name = "createForm' . $task->getId() .'">
+        <input type="hidden" name="taskId" value=' . $task->getId() . '>
+        <div class="row">'
+        . '<div class="col-sm">' . $task->getId() . '</div>' 
+        . '<div class="col-sm"' . $class .'>'. $task->getTitle() . '</div>'
+        . '<div class="col-sm">'. $task->getDateCreated() . '</div> '
+        . '<div class="col-sm">'. $task->getDateCompleted() . '</div>'
+        . '<div class="col-sm">'. $button . '</div></div></form></li>';
 }
-  echo  '</tbody>
-  </table>';
 
+    echo '</ul>';
 ?>
-    </div>
-    </div>
-    </div>
+</div>
+</div>
+</div>
 
-<script>
-    function completeTask(taskId) {
-
-        var form = document.createElement("form");
-        form.setAttribute("id", "completeTaskForm");
-        form.setAttribute("method", "post");
-        form.setAttribute("action", "TaskController.php");
-
-        var hiddenField = document.createElement("input");
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", "taskId");
-        hiddenField.setAttribute("value", taskId);
-
-        form.appendChild(hiddenField);
-        
-        document.body.appendChild(form);
-        form.submit();
-    }
-</script>
 
 </body>
 </html>
